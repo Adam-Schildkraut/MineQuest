@@ -9,6 +9,6 @@ public class BlockLeaves extends Block {
 	
 	@Override
 	public int getTexture(int i) {
-		return 9;
+		return 10;
 	}
 }

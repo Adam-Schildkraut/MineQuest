@@ -10,9 +10,9 @@ public class BlockOakWood extends Block {
 		switch(i) {
 			case Utils.TOP:
 				case Utils.BOTTOM:
-					return 8;
+					return 9;
 			default:
-			return 7;
+			return 8;
 		}
 	}
 }
