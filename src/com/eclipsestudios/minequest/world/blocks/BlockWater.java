@@ -20,7 +20,7 @@ public class BlockWater extends BlockFluid {
 			atlas.bind();
 			
 			t.setTextureDimensions(atlas);
-			t.rect.rectUV(96, 16, 96 + 16, 16 + 16);
+			t.rect.rectUV(112, 16, 112 + 16, 16 + 16);
 			t.rect.rect(0, 0, 0, window.getWidth(), window.getHeight());
 			t.render();
 			

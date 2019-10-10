@@ -169,7 +169,11 @@ public class EntityPlayer extends EntityLiving {
 				}
 			} else if (input.getMouseButton(MouseButton.RIGHT)) {
 				
-				if (mouseButtonTimer.getTimeMilli() >= 100) {
+				if (mouseButtonTimer.getTimeMilli() >= 250) {
+
+					if (getInventory().getItemStack(selectedSlot).getItem() == Block.air) {
+						return;
+					}
 					
 					if (getInventory().getItemStack(selectedSlot).getItem() instanceof Block) {
 						
@@ -185,7 +189,6 @@ public class EntityPlayer extends EntityLiving {
 							hitbox.move(x, y, z);
 							
 							if (!hitbox.collide(blockHitbox)) {
-
 								world.placeBlock(hit.x + Utils.x(hit.face), hit.y + Utils.y(hit.face), hit.z + Utils.z(hit.face), (Block)getInventory().getItemStack(selectedSlot).getItem(), this);
 								getInventory().getItemStack(selectedSlot).setCount(getInventory().getItemStack(selectedSlot).getCount() - 1);
 							}
