@@ -75,7 +75,7 @@ public class MineQuest implements Runnable {
 	@Override
 	public void run() {
 
-		window = new Window(this.width, this.height, "MineQuest Alpha 1.0.1", false);
+		window = new Window(this.width, this.height, "MineQuest Alpha 1.0.2", false);
 
 		GL.createCapabilities();
 
