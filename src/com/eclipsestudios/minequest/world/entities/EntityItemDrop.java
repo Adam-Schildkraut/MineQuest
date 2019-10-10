@@ -31,17 +31,22 @@ public class EntityItemDrop extends Entity {
 		
 		vy -= World.GRAVITY_FORCE;
 		
-		if(timer.getTimeMilli() > 1000) {
-			for(Entity entity : world.getEntityManager().getEntities()) {
-				if(Maths.distance(x, y, z, entity.x, entity.y, entity.z) <= 3f) {
-					if(entity.hasInventory()) {
+		if (timer.getTimeMilli() > 1000) {
+
+			for (Entity entity : world.getEntityManager().getEntities()) {
+
+				if (Maths.distance(x, y, z, entity.x, entity.y, entity.z) <= 3f) {
+
+					if (entity.hasInventory()) {
+
 						target = entity;
 					}
 				}
 			}
 		}
 		
-		if(target != null) {
+		if (target != null) {
+
 			x += (target.x - x) / 10.0f;
 			y += (target.y - y) / 10.0f;
 			z += (target.z - z) / 10.0f;
@@ -52,7 +57,8 @@ public class EntityItemDrop extends Entity {
 			AABB hitbox = new AABB();
 			getHitbox(hitbox);
 			hitbox.move(x, y, z);
-			if(targetHitbox.collide(hitbox)) {
+			if (targetHitbox.collide(hitbox)) {
+
 				target.getInventory().add(stack);
 			}
 		}

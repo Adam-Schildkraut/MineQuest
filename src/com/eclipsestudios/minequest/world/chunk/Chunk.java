@@ -51,11 +51,15 @@ public class Chunk {
 		
 		GL11.glNewList(lists, GL11.GL_COMPILE);
 		
-		for(int x = 0; x < 16; x++) {
-			for(int y = 0; y < 256; y++) {
-				for(int z = 0; z < 16; z++) {
+		for (int x = 0; x < 16; x++) {
+
+			for (int y = 0; y < 256; y++) {
+
+				for (int z = 0; z < 16; z++) {
+
 					Block block = Block.registry.getItemAsBlock(getBlock(x, y, z));
-					if(block.getID() != Block.air.getID() && !(block instanceof BlockFluid)) {
+					if (block.getID() != Block.air.getID() && !(block instanceof BlockFluid)) {
+
 						Block.registry.getItemAsBlock(getBlock(x, y, z)).render(Tessellator.INSTANCE, world, x + this.x * 16, y, z + this.z * 16);
 					}
 				}

@@ -15,6 +15,7 @@ public class Block extends Item {
 	
 	public static final Block air = new BlockAir();
 	public static final Block stone = new BlockStone();
+	public static final Block cobblestone = new BlockCobblestone();
 	public static final Block grass = new BlockGrass();
 	public static final Block oakWood = new BlockOakWood();
 	public static final Block leaves = new BlockLeaves();
@@ -27,12 +28,13 @@ public class Block extends Item {
 	static {
 		registry.registerBlockAsItem((byte)-128, air);
 		registry.registerBlockAsItem((byte)-127, stone);
-		registry.registerBlockAsItem((byte)-126, grass);
-		registry.registerBlockAsItem((byte)-125, oakWood);
-		registry.registerBlockAsItem((byte)-124, leaves);
-		registry.registerBlockAsItem((byte)-123, dirt);
-		registry.registerBlockAsItem((byte)-122, water);
-		registry.registerBlockAsItem((byte)-121, sand);
+		registry.registerBlockAsItem((byte)-126, cobblestone);
+		registry.registerBlockAsItem((byte)-125, grass);
+		registry.registerBlockAsItem((byte)-124, oakWood);
+		registry.registerBlockAsItem((byte)-123, leaves);
+		registry.registerBlockAsItem((byte)-122, dirt);
+		registry.registerBlockAsItem((byte)-121, water);
+		registry.registerBlockAsItem((byte)-120, sand);
 	}
 	
 	public Block() {

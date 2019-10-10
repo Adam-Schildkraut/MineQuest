@@ -1,9 +1,16 @@
 package com.eclipsestudios.minequest.world.blocks;
 
+import com.eclipsestudios.minequest.world.ItemStack;
+
 public class BlockStone extends Block {
 
 	public BlockStone() {
 		
+	}
+
+	@Override
+	public ItemStack getDrop() {
+		return new ItemStack(cobblestone, 1);
 	}
 	
 	@Override
