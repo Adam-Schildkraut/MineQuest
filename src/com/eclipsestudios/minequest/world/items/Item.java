@@ -10,6 +10,7 @@ import com.eclipsestudios.minequest.world.entities.Entity;
 public class Item {
 
 	public static final Item apple = new ItemApple();
+	public static final Item shears = new ItemShears();
 	
 	public static final ItemRegistry registry = new ItemRegistry();
 	
@@ -17,6 +18,7 @@ public class Item {
 	
 	static {
 		registry.registerItem((byte)127, apple);
+		registry.registerItem((byte)78, shears);
 	}
 	
 	

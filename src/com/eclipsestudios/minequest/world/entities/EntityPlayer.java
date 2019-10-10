@@ -44,6 +44,7 @@ public class EntityPlayer extends EntityLiving {
 		setInventory(new Inventory(9 * 5));
 		
 		getInventory().add(new ItemStack(Item.apple, 5));
+		getInventory().add(new ItemStack(Item.shears, 1));
 		
 		this.breakingTime = new Timer();
 	}
@@ -148,21 +149,29 @@ public class EntityPlayer extends EntityLiving {
 			if (input.getMouseButton(MouseButton.LEFT)) {
 				
 				BlockHit hit = world.pick((int)x - 8, (int)y - 8, (int)z - 8, (int)x + 8, (int)y + 8, (int)z + 8, this);
+
 				if (hit != null) {
 
 					if (world.getBlock(hit.x, hit.y, hit.z).isBreakable()) {
 
 						if (breakingTime.getTimeMilli() >= world.getBlock(hit.x, hit.y, hit.z).getBreakingTime()) {
-							
-							world.breakBlock(hit.x, hit.y, hit.z, this);
+
+							if (!(world.getBlock(hit.x, hit.y, hit.z) == Block.leaves && getInventory().getItemStack(selectedSlot).getItem() == Item.shears)) {
+								world.breakBlock(hit.x, hit.y, hit.z, this, false);
+							} else {
+								world.breakBlock(hit.x, hit.y, hit.z, this, true);
+							}
+
 							breakingBlock = null;
 							breakingTime.reset();
+
 						} else {
+
 							if (breakingBlock == null || (breakingBlock.x != hit.x || breakingBlock.y != hit.y || breakingBlock.z != breakingBlock.z)) {
 
 								breakingTime.reset();
 							}
-							
+
 							breakingBlock = hit;
 						}
 					}

@@ -231,10 +231,13 @@ public class World {
 		block.onPlace(this, x, y, z, placer);
 	}
 	
-	public void breakBlock(int x, int y, int z, Entity breaker) {
+	public void breakBlock(int x, int y, int z, Entity breaker, boolean shouldDropItem) {
 		
 		MineQuest.instance.getSoundSystem().playSound(false, getBlock(x, y, z).getBlockBreakingSound(), x, y, z, 1.0f);
-		getEntityManager().addEntity(new EntityItemDrop(getBlock(x, y, z).getDrop(), x, y, z));
+		if (shouldDropItem) {
+
+			getEntityManager().addEntity(new EntityItemDrop(getBlock(x, y, z).getDrop(), x, y, z));
+		}
 		getBlock(x, y, z).onBreak(this, x, y, z, breaker);
 		setBlock(x, y, z, Block.air);
 	}
