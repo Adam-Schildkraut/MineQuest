@@ -12,6 +12,7 @@ import com.eclipsestudios.minequest.utils.Debug;
 import com.eclipsestudios.minequest.utils.Timer;
 import com.eclipsestudios.minequest.world.Sounds;
 import com.eclipsestudios.minequest.world.World;
+import com.eclipsestudios.minequest.world.blocks.Block;
 import com.eclipsestudios.minequest.world.entities.EntityPlayer;
 import org.lwjgl.opengl.GL;
 
@@ -24,6 +25,8 @@ public class MineQuest implements Runnable {
 
 	private Window window;
 	private World world;
+	public int spawnY = 255;
+	public int spawnX = World.MAX_LOADED_CHUNKS * 16 / 2, spawnZ = World.MAX_LOADED_CHUNKS * 16 / 2;
 	private Input input;
 	private EntityPlayer player;
 	public boolean paused;
@@ -39,14 +42,23 @@ public class MineQuest implements Runnable {
 		Sounds.init(soundSystem);
 
 		world = new World();
-		player = new EntityPlayer(World.MAX_LOADED_CHUNKS * 16 / 2, 80, World.MAX_LOADED_CHUNKS * 16 / 2);
-		
+
+		player = new EntityPlayer(0, 0, 0);
+		while (world.getBlock((int)player.getXPosition(), spawnY, (int)player.getZPosition()) == Block.air) {
+			spawnY--;
+		}
+
+		player.setXPosition(spawnX);
+		player.setYPosition(spawnY + 4);
+		player.setZPosition(spawnZ);
+
 		Debug.info("Spawning in player...");
 		world.getEntityManager().addEntity(player);
-		
+
 		input.hideCursor(true);
 
 		showScreen(new PlayingScreen());
+
 	}
 
 	public void render() {

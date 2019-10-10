@@ -31,6 +31,7 @@ public class EntityPlayer extends EntityLiving {
 	
 	private Timer breakingTime;
 	private Timer mouseButtonTimer;
+	private Timer healthTimer;
 	
 	private BlockHit breakingBlock;
 	
@@ -39,6 +40,7 @@ public class EntityPlayer extends EntityLiving {
 		
 		this.camRx = 0;
 		this.mouseButtonTimer = new Timer();
+		this.healthTimer = new Timer();
 		
 		this.selectedSlot = 0;
 		setInventory(new Inventory(9 * 5));
@@ -61,19 +63,19 @@ public class EntityPlayer extends EntityLiving {
 				
 		final Input input = MineQuest.instance.getInput();
 		
-		if(input.getKeyDown(KeyCode.KEY_T)) {
+		if (input.getKeyDown(KeyCode.KEY_T)) {
 			world.getEntityManager().addEntity(new EntityZombie(x, y, z));
 		}
 		
-		if(input.getKeyDown(KeyCode.KEY_E)) {
-			if(MineQuest.instance.currentScreen() instanceof PlayerInventoryScreen) {
+		if (input.getKeyDown(KeyCode.KEY_E)) {
+			if (MineQuest.instance.currentScreen() instanceof PlayerInventoryScreen) {
 				MineQuest.instance.showScreen(new PlayingScreen());
-			}else {			
+			} else {
 				MineQuest.instance.showScreen(new PlayerInventoryScreen());
 			}
 		}
 		
-		if(!MineQuest.instance.paused) {
+		if (!MineQuest.instance.paused) {
 			
 			this.ry += input.getMouseDX() * sensitivity;
 			this.camRx -= input.getMouseDY() * sensitivity;
@@ -156,7 +158,7 @@ public class EntityPlayer extends EntityLiving {
 
 						if (breakingTime.getTimeMilli() >= world.getBlock(hit.x, hit.y, hit.z).getBreakingTime()) {
 
-							if (!(world.getBlock(hit.x, hit.y, hit.z) == Block.leaves && getInventory().getItemStack(selectedSlot).getItem() == Item.shears)) {
+							if (world.getBlock(hit.x, hit.y, hit.z) == Block.leaves && !(getInventory().getItemStack(selectedSlot).getItem() == Item.shears)) {
 								world.breakBlock(hit.x, hit.y, hit.z, this, false);
 							} else {
 								world.breakBlock(hit.x, hit.y, hit.z, this, true);
@@ -213,6 +215,17 @@ public class EntityPlayer extends EntityLiving {
 		} else {
 			this.vy = 0;
 		}
+
+		if (world.getBlock((int)getXPosition(), (int)getYPosition() - 2, (int)getZPosition()) != Block.air && this.vy < -0.3) {
+			setHealth((int)((float)getHealth() + (this.vy * 3)));
+		}
+
+		if (getHealth() <= 0) {
+			setHealth(20);
+			setXPosition(MineQuest.instance.spawnX);
+			setYPosition(MineQuest.instance.spawnY + 4);
+			setZPosition(MineQuest.instance.spawnZ);
+		}
 	}
 	
 	@Override
@@ -231,7 +244,6 @@ public class EntityPlayer extends EntityLiving {
 			Texture.unbind();
 		}
 	}
-	
 	
 	public int getSelectedSlot() {
 		return selectedSlot;

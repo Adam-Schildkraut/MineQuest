@@ -21,6 +21,7 @@ public abstract class Entity {
 	public boolean headInFluid;
 	public byte fluidID;
 	private Inventory inventory;
+	public boolean hasHitBlock;
 	
 	private List<EntityUpdateEvent> updates;
 	
@@ -129,6 +130,7 @@ public abstract class Entity {
 						block.getHitbox(blockHitbox);
 						blockHitbox.move(i, j, k);
 						vy = blockHitbox.clipYCoord(hitbox, vy);
+						hasHitBlock = true;
 					}
 				}
 			}
@@ -174,8 +176,37 @@ public abstract class Entity {
 		this.y += vy;
 		this.z += vz;
 	}
+
+	public boolean hasHitBlock() {
+		System.out.println("Player has hit block in Entity class");
+		return hasHitBlock;
+	}
 	
 	public void getHitbox(AABB dest) {}
+
+	public float getXPosition() {
+		return x;
+	}
+
+	public float setXPosition(float x) {
+		return this.x = x;
+	}
+
+	public float getYPosition() {
+		return y;
+	}
+
+	public float setYPosition(float y) {
+		return this.y = y;
+	}
+
+	public float getZPosition() {
+		return z;
+	}
+
+	public float setZPosition(float z) {
+		return this.z = z;
+	}
 
 	protected void setInventory(Inventory inventory) {
 		this.inventory = inventory;
