@@ -7,7 +7,7 @@ public class BlockDirt extends Block {
 
 	@Override
 	public int getTexture(int i) {
-		return 4; 
+		return 5;
 	}
 	
 	public Sound getBlockBreakingSound() {

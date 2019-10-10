@@ -24,11 +24,11 @@ public class BlockGrass extends Block {
 
 		switch (i) {
 		case Utils.TOP:
-			return 2;
-		case Utils.BOTTOM:
-			return 4;
-		default:
 			return 3;
+		case Utils.BOTTOM:
+			return 5;
+		default:
+			return 4;
 		}
 	}
 	

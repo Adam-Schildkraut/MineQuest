@@ -30,7 +30,7 @@ public class BlockWater extends BlockFluid {
 	
 	@Override
 	public int getTexture(int i) {
-		return 22;
+		return 23;
 	}
 	
 	@Override
