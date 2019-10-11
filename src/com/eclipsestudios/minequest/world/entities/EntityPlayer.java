@@ -21,7 +21,7 @@ import com.eclipsestudios.minequest.world.items.Item;
 
 public class EntityPlayer extends EntityLiving {
 
-	private float speed = 0.1f;
+	private float speed = 0.075f;
 	private float sensitivity = 1;
 	private float camRx;
 	
@@ -113,9 +113,15 @@ public class EntityPlayer extends EntityLiving {
 			if (input.getKeyDown(KeyCode.KEY_G)) {
 				setHealth(getHealth() - 1);
 			}
-			
+
 			if (input.getKey(KeyCode.KEY_W)) {
-				moveFront(-speed);
+				if (input.getKey(KeyCode.KEY_LEFT_SHIFT)) {
+					moveFront((float)(-speed * 2));
+					System.out.println("Sprint");
+				} else {
+					moveFront(-speed);
+					System.out.println("Walk");
+				}
 			}
 			if (input.getKey(KeyCode.KEY_A)) {
 				moveRight(-speed);
